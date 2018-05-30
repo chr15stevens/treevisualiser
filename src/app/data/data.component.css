@@ -1,0 +1,25 @@
+h3 {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    border-bottom: 2px black solid;
+}
+
+tr.selectable {
+    cursor: pointer;
+}
+
+tr.row-odd {
+    background-color: #DDD;
+}
+
+tr.selectable.selected {
+    background-color: cadetblue;
+}

@@ -1,0 +1,15 @@
+<div>
+    <h3 (click)="toggleCollapse()">{{(useTestData? 'Test Data': 'Training Data')}} {{(isCollapsed? '[+]': '[-]')}}</h3>
+    <table [hidden]="isCollapsed">
+        <tr>
+            <th *ngFor="let feature of data.features">{{feature | titlecase}}</th>
+            <th>{{data.targetProperty | titlecase}}</th>
+        </tr>
+        <tr *ngFor="let datum of (useTestData? data.test: data.training); odd as isOdd" (click)="rowClick(datum)"
+        class="{{isOdd? 'row-odd': 'row-even'}}" 
+        [ngClass]="{ 'selected': selected === datum, 'selectable': useTestData }">
+            <td *ngFor="let feature of data.features">{{datum[feature]}}</td>
+            <td>{{datum[data.targetProperty]}}</td>
+        </tr>
+    </table>
+</div>

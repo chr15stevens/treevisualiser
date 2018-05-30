@@ -1,0 +1,50 @@
+h1 {
+    width: 30%;
+    font-size: 30px;
+    margin-left: 5px;
+}
+
+h1, h2 {
+    float: left;
+    margin:0 30px 0 0;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.all-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.head-container {
+    position: fixed;
+    width: 100%;
+    border-bottom: 10px #DDD solid;
+}
+
+
+.content-container {
+    position: fixed;
+    width: 100%;
+    top: 35px;
+    bottom: 0;
+}
+
+.datasets-container {
+    width: 65%;
+    float: left;
+}
+
+.dataset {
+    float:left;
+    cursor: pointer;
+    padding: 0 5px
+}
+
+.dataset.selected {
+    background-color: cadetblue;
+}

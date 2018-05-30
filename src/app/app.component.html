@@ -1,0 +1,17 @@
+<div class="all-container">
+    <div class="head-container">
+        <h1>
+            &nbsp;&nbsp;{{ title }}
+        </h1>
+        <div class="datasets-container">
+            <div *ngFor="let dataset of datasets" (click)="selectDataset(dataset)" class="dataset"
+                [ngClass]="{'selected': selectedDataset === dataset}">
+                <h2>{{dataset.title}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="clear:both;"></div>
+    <div class="content-container">
+        <app-tree [dataset]="selectedDataset"></app-tree>
+    </div>
+</div>

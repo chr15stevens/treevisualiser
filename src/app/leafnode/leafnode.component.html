@@ -1,0 +1,11 @@
+<div class="leaf" [ngClass]="{ 'is-root': isRoot }">
+    <div *ngIf="!isRoot" class="vertical-line"></div>
+    <span (click)="onClick1()" class="name {{leafNode.isSelected? 'selected': ''}}">
+        {{leafNode.name | titlecase}}
+    </span>
+    <div *ngIf="leafNode.type !== 'result'" class="vertical-line"></div>
+    <!-- horizontal line -->
+    <div *ngIf="leafNode.type !== 'result'" class="children" [ngStyle]="{'border-top': (leafNode.vals.length > 1? '1px brown solid': 'none')}">
+        <app-leafnode *ngFor="let child of leafNode.vals" [leafNode]="child"></app-leafnode>
+    </div>
+</div>

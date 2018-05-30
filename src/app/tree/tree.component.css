@@ -1,0 +1,23 @@
+.data-container, .separator, .tree-container {
+    position: fixed;
+    overflow: auto;
+    margin: 1% 0.5%;
+    top: 35px;
+    bottom: 0;
+}
+
+.data-container {
+    width: 30%;
+}
+
+.separator {
+    width: 1%;
+    left: 31%;
+    background-color: #DDD;
+    margin:0;
+}
+
+.tree-container {
+    width: 67%;
+    right: 0;
+}

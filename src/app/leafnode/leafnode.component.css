@@ -1,0 +1,32 @@
+.leaf {
+    display: inline-block;
+    min-height: 40px;
+    margin: 0 5px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align:top;
+}
+.vertical-line {
+    background-color: brown;
+    width: 2px;
+    margin: auto;
+    height: 10px;
+}
+
+.is-root {
+    margin-top: 10px;
+}
+
+.children {
+    border-top: 1px brown solid;
+}
+
+.name {
+    background-color: #4da83b ;
+    border-radius: 5px;
+    padding:2px;
+}
+
+.selected {
+    background-color: cadetblue;
+}
