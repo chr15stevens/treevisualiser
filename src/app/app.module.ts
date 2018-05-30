@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TreeComponent } from './tree/tree.component';
 import { DataComponent } from './data/data.component';
 import { LeafnodeComponent } from './leafnode/leafnode.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TreeComponent,
     DataComponent,
-    LeafnodeComponent
+    LeafnodeComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

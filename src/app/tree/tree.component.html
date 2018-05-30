@@ -2,6 +2,7 @@
     <div #dataContainer class="data-container">
         <app-data [data]="dataset"></app-data>
         <app-data [data]="dataset" [useTestData]="true" [onRowClick]="predict"></app-data>
+        <app-result [percentageAccuracy]="percentageAccuracy"></app-result>
     </div>
     <div #separator class="separator" (dragend)="onSeparatorDrag($event)">
     </div>

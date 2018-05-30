@@ -1,0 +1,6 @@
+<div>
+    <h3 (click)="toggleCollapse()">Results {{(isCollapsed? '[+]': '[-]')}}</h3>
+    <div [hidden]="isCollapsed">
+        Prediction Accuracy: {{percentageAccuracy}}%
+    </div>
+</div>

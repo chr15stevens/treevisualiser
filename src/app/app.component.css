@@ -1,14 +1,16 @@
 h1 {
-    width: 30%;
     font-size: 30px;
-    margin-left: 5px;
 }
 
 h1, h2 {
-    float: left;
-    margin:0 30px 0 0;
+    margin: 0;
     vertical-align: middle;
     line-height: 35px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 18px;
 }
 
 .all-container {
@@ -20,12 +22,18 @@ h1, h2 {
     overflow: auto;
 }
 
+.title-container {
+    position: fixed;
+    left: 0;
+    width: 31%;
+}
+
 .head-container {
     position: fixed;
     width: 100%;
     border-bottom: 10px #DDD solid;
+    height: 35px;
 }
-
 
 .content-container {
     position: fixed;
@@ -34,9 +42,18 @@ h1, h2 {
     bottom: 0;
 }
 
+.dataset-title, .algorithm-title {
+    float:left;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 35px;
+    margin: 0 5px;
+}
+
 .datasets-container {
-    width: 65%;
-    float: left;
+    position: fixed;
+    width: 67%;
+    right: 0;
 }
 
 .dataset {
@@ -47,4 +64,8 @@ h1, h2 {
 
 .dataset.selected {
     background-color: cadetblue;
+}
+
+.dataset.selected h2 {
+    font-weight: bold;
 }

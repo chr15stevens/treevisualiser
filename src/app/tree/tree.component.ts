@@ -15,12 +15,14 @@ export class TreeComponent implements OnInit {
     @ViewChild('treeContainer') treeContainer: ElementRef;
     @ViewChild('separator') separator: ElementRef;
     private dragCount: number = 0;
+    private percentageAccuracy = 0;
 
     @Input()
     set dataset(dataset: Data){
         this._dataset = dataset;
         this.model = new ID3(dataset.training, dataset.targetProperty, dataset.features);
         this.model.build();
+        this.percentageAccuracy = this.model.calcPercentageAccuracy(this._dataset.test);
     }
 
     get dataset(): Data {

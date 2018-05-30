@@ -1,12 +1,20 @@
 <div class="all-container">
     <div class="head-container">
-        <h1>
-            &nbsp;&nbsp;{{ title }}
-        </h1>
+        <div class="title-container">
+            <h1>
+                &nbsp;&nbsp;{{ title }}
+            </h1>
+        </div>
         <div class="datasets-container">
+            <div class="dataset-title"> Dataset: </div>
             <div *ngFor="let dataset of datasets" (click)="selectDataset(dataset)" class="dataset"
                 [ngClass]="{'selected': selectedDataset === dataset}">
                 <h2>{{dataset.title}}</h2>
+            </div>
+            <div class="algorithm-title"> Algorithm: </div>
+            <div *ngFor="let algorithmName of algorithmNames" (click)="selectAlgorithm(algorithm)" class="dataset"
+                [ngClass]="{'selected': selectedAlgorithm.name === algorithmName}">
+                <h2>{{algorithmName}}</h2>
             </div>
         </div>
     </div>

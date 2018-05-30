@@ -2,8 +2,9 @@
 import * as _ from 'underscore';
 
 //main algorithm and prediction functions
-export class ID3 {
-
+export class ID3 implements TreeAlgorithm {
+    name: string = 'ID3';
+    description: string = '';
     features: string[];
     target: string;
     trainingData: object[];
@@ -70,7 +71,7 @@ export class ID3 {
         });
     };
 
-    predict = (testDatum: Object) => {
+    predict = (testDatum: object) => {
         let currentNode = this.modelRoot;
         while(currentNode !== undefined && currentNode.type != 'result') {
             currentNode.isSelected = true;
@@ -80,14 +81,22 @@ export class ID3 {
             var childNode = _.detect(currentNode.vals, (x: any) => { 
                 return x.name == testValue
             });
-            childNode.isSelected = true;
-            this.selectedNodes.push(childNode);
-            currentNode = childNode.vals[0];
+            if (childNode) {
+                childNode.isSelected = true;
+                this.selectedNodes.push(childNode);
+                currentNode = childNode.vals[0];
+            } else{
+                console.log(`Missing ${testValue} value in child node.`)
+                currentNode = childNode;
+            }
         }
-        currentNode.isSelected = true;
-        this.selectedNodes.push(currentNode);
 
-        return currentNode.vals;
+        if (currentNode){
+            currentNode.isSelected = true;
+            this.selectedNodes.push(currentNode);
+            return currentNode.vals;
+        }
+        return [];
     };
 
     deselectAllNodes = () => {
@@ -97,7 +106,7 @@ export class ID3 {
         this.selectedNodes = [];
     }
 
-    calcError = function(testData){
+    calcPercentageAccuracy = function(testData: object[]){
         var total = 0;
         var correct = 0;
         _.each(testData, testDatum => {
@@ -108,7 +117,9 @@ export class ID3 {
                 correct++;
             }
         });
-        return correct/total;
+        this.deselectAllNodes();
+
+        return (correct/total) * 100;
     }
 
     static entropy = function(vals) {
@@ -165,46 +176,13 @@ export class ID3 {
     static randomTag = function(): string {
         return "_r" + Math.round(Math.random()*1000000).toString();
     }
+}
 
-
-    //Display logic
-
-    // drawGraph = function(id3Model,divId){
-    //     var g = new Array();
-    //     g = ID3.addEdges(id3Model,g).reverse();
-    //     window.g = g;
-    //     var data = google.visualization.arrayToDataTable(g.concat(g));
-    //     var chart = new google.visualization.OrgChart(document.getElementById(divId));
-    //     google.visualization.events.addListener(chart, 'ready',function(){
-    //         _.each($('.google-visualization-orgchart-node'),function(x){
-    //             var oldVal = $(x).html();
-    //             if(oldVal){
-    //                 var cleanVal = oldVal.replace(/_r[0-9]+/,'');
-    //                 $(x).html(cleanVal);
-    //             }
-    //         }); 
-    //     });
-    //     chart.draw(data, {allowHtml: true});
-    // }
-    
-    // addEdges = function(node,g){
-    //     if(node.type == 'feature'){
-    //     _.each(node.vals,function(m){
-    //         g.push([m.alias,node.alias,'']);
-    //         g = addEdges(m,g);
-    //     });
-    //     return g;
-    //     }
-    //     if(node.type == 'feature_value'){
-    
-    //     g.push([node.child.alias,node.alias,'']);
-    //     if(node.child.type != 'result'){
-    //         g = addEdges(node.child,g);
-    //     }
-    //     return g;
-    //     }
-    //     return g;
-    // }
+export interface TreeAlgorithm {
+    modelRoot: LeafNode;
+    build: () => void;
+    predict: (testDatum: object) => any[];
+    calcPercentageAccuracy: (testData: object[]) => number;
 }
 
 export class LeafNode {
