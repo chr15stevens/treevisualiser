@@ -1,11 +1,11 @@
 .leaf {
     display: inline-block;
     min-height: 40px;
-    margin: 0 5px;
     text-align: center;
     white-space: nowrap;
     vertical-align:top;
 }
+
 .vertical-line {
     background-color: brown;
     width: 2px;
@@ -13,20 +13,42 @@
     height: 10px;
 }
 
-.is-root {
-    margin-top: 10px;
+.horizontal-line {
+    background-color: brown;
+    height: 2px;
+    margin: auto;
+    width: 100%;
 }
 
-.children {
-    border-top: 1px brown solid;
+.horizontal-line.first {
+    width: 50%;
+    float: right;
+}
+
+.horizontal-line.last {
+    width: 50%;
+    float: left;
+}
+
+.horizontal-line.selected, .vertical-line.selected{
+    background-color: cadetblue;
+}
+
+.is-root {
+    margin-top: 10px;
 }
 
 .name {
     background-color: #4da83b ;
     border-radius: 5px;
     padding:2px;
+    margin: 5px;
 }
 
-.selected {
+.name.selected{
     background-color: cadetblue;
+}
+
+.name.selected.result{
+    font-weight: bold;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Tree } from './tree';
 import { ID3, LeafNode } from './../../id3';
 import { Data } from './../../data'
@@ -11,6 +11,10 @@ import { Data } from './../../data'
 export class TreeComponent implements OnInit {
     private _dataset: Data;
     model: ID3;
+    @ViewChild('dataContainer') dataContainer: ElementRef;
+    @ViewChild('treeContainer') treeContainer: ElementRef;
+    @ViewChild('separator') separator: ElementRef;
+    private dragCount: number = 0;
 
     @Input()
     set dataset(dataset: Data){
@@ -28,6 +32,21 @@ export class TreeComponent implements OnInit {
     ngOnInit() {
         // this.model = new ID3(this.dataset.training, this.dataset.targetProperty, this.dataset.features);
         // this.model.build();
+    }
+
+    onSeparatorDrag = (e: DragEvent) => {
+        // if (this.dragCount%100 == 0) {
+            let newSeparatorPosition = e.screenX;
+            if( newSeparatorPosition != 0) {
+                let browserWidth = window.innerWidth;
+                let percentPosition = (newSeparatorPosition/browserWidth) * 100;
+                console.log('drag', e, 'pp', percentPosition);
+                this.dataContainer.nativeElement.style.width = percentPosition.toString() + "%";
+                this.separator.nativeElement.style.left = (percentPosition + 1).toString() + "%";
+                this.treeContainer.nativeElement.style.width = (97 - percentPosition).toString() + "%";
+            }
+        // }
+        this.dragCount++;
     }
 
     predict = (datum: any) => {

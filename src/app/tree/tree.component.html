@@ -1,12 +1,11 @@
 <div style="display:block">
-    <div class="data-container">
+    <div #dataContainer class="data-container">
         <app-data [data]="dataset"></app-data>
         <app-data [data]="dataset" [useTestData]="true" [onRowClick]="predict"></app-data>
     </div>
-    <div class="separator">
-        
+    <div #separator class="separator" (dragend)="onSeparatorDrag($event)">
     </div>
-    <div class="tree-container">
+    <div #treeContainer class="tree-container">
         <app-leafnode [leafNode]="model.modelRoot" [isRoot]='true'></app-leafnode>
     </div>
 </div>

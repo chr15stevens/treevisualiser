@@ -10,13 +10,13 @@ export class LeafnodeComponent implements OnInit {
 
     @Input() leafNode: LeafNode;
     @Input() isRoot: Boolean = false;
+    @Input() firstChild: Boolean = false;
+    @Input() lastChild: Boolean = false;
+    @Input() siblingCount: Number = 0;
+
     constructor() { }
 
     ngOnInit() {
         console.log(this.leafNode.type)
-    }
-
-    onClick1 = () => {
-        console.log(this);
     }
 }

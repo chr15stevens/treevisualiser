@@ -1,11 +1,14 @@
 <div class="leaf" [ngClass]="{ 'is-root': isRoot }">
-    <div *ngIf="!isRoot" class="vertical-line"></div>
-    <span (click)="onClick1()" class="name {{leafNode.isSelected? 'selected': ''}}">
+    <div *ngIf="leafNode.type !== 'result' && !isRoot && siblingCount > 1" class="horizontal-line"
+        [ngClass]="{'first': firstChild, 'last': lastChild, 'selected': leafNode.isSelected }"></div>
+    <div *ngIf="!isRoot" class="vertical-line" [ngClass]="{'selected': leafNode.isSelected }"></div>
+    <span class="name" [ngClass]="{'selected': leafNode.isSelected, result: leafNode.type === 'result'}">
         {{leafNode.name | titlecase}}
     </span>
-    <div *ngIf="leafNode.type !== 'result'" class="vertical-line"></div>
-    <!-- horizontal line -->
-    <div *ngIf="leafNode.type !== 'result'" class="children" [ngStyle]="{'border-top': (leafNode.vals.length > 1? '1px brown solid': 'none')}">
-        <app-leafnode *ngFor="let child of leafNode.vals" [leafNode]="child"></app-leafnode>
+    <div *ngIf="leafNode.type !== 'result'" class="vertical-line" [ngClass]="{'selected': leafNode.isSelected }"></div>
+    <div *ngIf="leafNode.type !== 'result'" class="children">
+        <app-leafnode *ngFor="let child of leafNode.vals; let first = first; let last = last;"
+        [leafNode]="child" [firstChild]="first" [lastChild]="last" [siblingCount]="leafNode.vals.length">
+        </app-leafnode>
     </div>
 </div>
