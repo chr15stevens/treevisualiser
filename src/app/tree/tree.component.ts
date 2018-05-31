@@ -16,7 +16,7 @@ export class TreeComponent implements OnInit {
     @ViewChild('treeContainer') treeContainer: ElementRef;
     @ViewChild('separator') separator: ElementRef;
     private dragCount: number = 0;
-    private percentageAccuracy = 0;
+    percentageAccuracy = 0;
 
     @Input()
     set dataset(dataset: Data){
