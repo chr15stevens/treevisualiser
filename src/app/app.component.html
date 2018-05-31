@@ -11,15 +11,15 @@
                 [ngClass]="{'selected': selectedDataset === dataset}">
                 <h2>{{dataset.title}}</h2>
             </div>
-            <div class="algorithm-title"> Algorithm: </div>
-            <div *ngFor="let algorithmName of algorithmNames" (click)="selectAlgorithm(algorithm)" class="dataset"
-                [ngClass]="{'selected': selectedAlgorithm.name === algorithmName}">
+            <div class="algorithm-title"> Algo: </div>
+            <div *ngFor="let algorithmName of algorithmNames" (click)="selectAlgorithm(algorithmName)" class="dataset"
+                [ngClass]="{'selected': selectedAlgorithmName === algorithmName}">
                 <h2>{{algorithmName}}</h2>
             </div>
         </div>
     </div>
     <div class="clear:both;"></div>
     <div class="content-container">
-        <app-tree [dataset]="selectedDataset"></app-tree>
+        <app-tree [dataset]="selectedDataset" [algorithmName]="selectedAlgorithmName"></app-tree>
     </div>
 </div>

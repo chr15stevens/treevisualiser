@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { Component, OnInit, Input } from '@angular/core';
 import { Data } from './../../data'
 
@@ -7,11 +8,27 @@ import { Data } from './../../data'
     styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
-    @Input() data: Data;
+    private _data: Data;
     @Input() useTestData: boolean = false;
     @Input() onRowClick: Function;
     isCollapsed: Boolean = false;
     selected: Object = null;
+    testPredictions: { wasPredicted: boolean, wasCorrect: boolean }[];
+
+    @Input()
+    set data(data: Data){
+        this._data = data;
+        this.testPredictions = _.pluck(this.data.test, this.data.targetProperty).map((targetVal) => {
+            return {
+                wasPredicted: false,
+                wasCorrect: false
+            }
+        });
+    }
+    
+    get data(): Data {
+        return this._data;
+    }
 
     constructor() {
     }
@@ -23,8 +40,14 @@ export class DataComponent implements OnInit {
         this.isCollapsed = !this.isCollapsed;
     }
 
-    rowClick = (datum: Object) => {
+    rowClick = (datum: Object, index: number) => {
         this.selected = datum;
-        if (this.onRowClick) this.onRowClick(datum);
+        if (this.onRowClick) {
+            let testPrediction = this.testPredictions[index];
+            if (!testPrediction.wasPredicted) {
+                testPrediction.wasCorrect = this.onRowClick(datum)[0] === datum[this.data.targetProperty];
+                testPrediction.wasPredicted = true;
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Data, PlayTennisData, VotingData, TicTacToeData } from './../data';
-import { TreeAlgorithm, ID3 } from './../id3'
+import { ITreeAlgorithm, ID3, C45 } from './../id3'
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -9,13 +9,13 @@ import { TreeAlgorithm, ID3 } from './../id3'
 export class AppComponent {
     title = 'Tree Visualiser';
     datasets: Data[] = [new PlayTennisData(), new VotingData(), new TicTacToeData()];
-    algorithmNames: string[] = ['ID3', 'C4.5', 'CART', 'RANDOM FOREST'];
+    algorithmNames: string[] = ['ID3', 'C4.5']; //, 'CART', 'RANDOM FOREST'];
     selectedDataset: Data;
-    selectedAlgorithm: TreeAlgorithm;
+    selectedAlgorithmName: string;
 
     constructor() {
         this.selectedDataset = this.datasets[0];
-        this.selectedAlgorithm = this.getAlgoClassFromName(this.algorithmNames[0])
+        this.selectedAlgorithmName = 'ID3';
     }
 
     selectDataset = (dataset: Data) => {
@@ -23,11 +23,6 @@ export class AppComponent {
     }
 
     selectAlgorithm = (algorithmName: string) => {
-        this.selectedAlgorithm = this.getAlgoClassFromName(algorithmName);
-    }
-
-    private getAlgoClassFromName = (name: string) => {
-        if (name === 'ID3') 
-            return new ID3(this.selectedDataset.training, this.selectedDataset.targetProperty, this.selectedDataset.features); 
+        this.selectedAlgorithmName = algorithmName;
     }
 }

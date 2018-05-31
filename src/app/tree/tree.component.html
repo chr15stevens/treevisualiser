@@ -7,6 +7,6 @@
     <div #separator class="separator" (dragend)="onSeparatorDrag($event)">
     </div>
     <div #treeContainer class="tree-container">
-        <app-leafnode [leafNode]="model.modelRoot" [isRoot]='true'></app-leafnode>
+        <app-leafnode *ngIf="!!model" [leafNode]="model.modelRoot" [isRoot]='true'></app-leafnode>
     </div>
 </div>

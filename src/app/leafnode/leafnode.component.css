@@ -7,14 +7,14 @@
 }
 
 .vertical-line {
-    background-color: brown;
+    background-color: #8c684a;
     width: 2px;
     margin: auto;
     height: 10px;
 }
 
 .horizontal-line {
-    background-color: brown;
+    background-color: #8c684a;
     height: 2px;
     margin: auto;
     width: 100%;

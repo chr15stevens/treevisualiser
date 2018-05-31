@@ -21,5 +21,13 @@ tr.row-odd {
 }
 
 tr.selectable.selected {
-    background-color: cadetblue;
+    background-color: cadetblue !important;
+}
+
+tr.wasPredicted, td.wasPredicted {
+    background-color: red;
+}
+
+tr.wasPredicted.wasCorrect, td.wasPredicted.wasCorrect {
+    background-color: green;
 }

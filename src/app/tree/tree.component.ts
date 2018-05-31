@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Tree } from './tree';
-import { ID3, LeafNode } from './../../id3';
+import { ID3, C45, LeafNode, TreeAlgorithm } from './../../id3';
 import { Data } from './../../data'
 
 @Component({
@@ -10,7 +10,8 @@ import { Data } from './../../data'
 })
 export class TreeComponent implements OnInit {
     private _dataset: Data;
-    model: ID3;
+    private _algorithmName: string;
+    model: TreeAlgorithm;
     @ViewChild('dataContainer') dataContainer: ElementRef;
     @ViewChild('treeContainer') treeContainer: ElementRef;
     @ViewChild('separator') separator: ElementRef;
@@ -20,21 +21,35 @@ export class TreeComponent implements OnInit {
     @Input()
     set dataset(dataset: Data){
         this._dataset = dataset;
-        this.model = new ID3(dataset.training, dataset.targetProperty, dataset.features);
-        this.model.build();
-        this.percentageAccuracy = this.model.calcPercentageAccuracy(this._dataset.test);
+        if (this._algorithmName) {
+            this.model = this.getAlgoClassFromName(this._algorithmName)
+            this.initializeModel();
+        }
     }
 
     get dataset(): Data {
         return this._dataset;
     }
 
+    @Input()
+    set algorithmName(algoName: string){
+        this._algorithmName = algoName;
+        this.model = this.getAlgoClassFromName(algoName)
+        if (this.dataset) {
+            this.initializeModel();
+        }
+    }
+
     constructor() { }
 
     ngOnInit() {
-        // this.model = new ID3(this.dataset.training, this.dataset.targetProperty, this.dataset.features);
-        // this.model.build();
     }
+
+    initializeModel = () => {
+        this.model.build();
+        this.percentageAccuracy = this.model.calcPercentageAccuracy(this._dataset.test);
+    }
+
 
     onSeparatorDrag = (e: DragEvent) => {
         // if (this.dragCount%100 == 0) {
@@ -53,7 +68,14 @@ export class TreeComponent implements OnInit {
 
     predict = (datum: any) => {
         this.model.deselectAllNodes()
-        console.log(datum);
-        console.log(this.model.predict(datum))
+        return this.model.predict(datum)
+    }
+
+    // todo: make this a cache
+    private getAlgoClassFromName = (name: string): TreeAlgorithm => {
+        if (name === 'ID3') 
+            return new ID3(this._dataset.training, this._dataset.targetProperty, this._dataset.features);
+        else if(name === 'C4.5')
+            return new C45(this._dataset.training, this._dataset.targetProperty, this._dataset.features);
     }
 }

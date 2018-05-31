@@ -5,11 +5,13 @@
             <th *ngFor="let feature of data.features">{{feature | titlecase}}</th>
             <th>{{data.targetProperty | titlecase}}</th>
         </tr>
-        <tr *ngFor="let datum of (useTestData? data.test: data.training); odd as isOdd" (click)="rowClick(datum)"
+        <tr *ngFor="let datum of (useTestData? data.test: data.training); let i = index; odd as isOdd" (click)="rowClick(datum, i)"
         class="{{isOdd? 'row-odd': 'row-even'}}" 
-        [ngClass]="{ 'selected': selected === datum, 'selectable': useTestData }">
+        [ngClass]="{ 'selected': selected === datum, 'selectable': useTestData,
+        'wasPredicted': useTestData && testPredictions[i].wasPredicted,
+        'wasCorrect': useTestData && testPredictions[i].wasCorrect }">
             <td *ngFor="let feature of data.features">{{datum[feature]}}</td>
-            <td>{{datum[data.targetProperty]}}</td>
+            <td [ngClass]="testPredictions[i]">{{datum[data.targetProperty]}}</td>
         </tr>
     </table>
 </div>
