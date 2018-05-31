@@ -1,6 +1,10 @@
 # TreeVisualiser
 
-A project to visualise tree algorithms and aid with understanding.
+A project to visualise tree algorithms ID3 and C45 and aid with understanding.
+
+To view in browser go [here](https://chr15stevens.github.io/treevisualiser/dist/tree-visualiser/index.html)
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
