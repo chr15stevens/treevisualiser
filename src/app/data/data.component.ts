@@ -44,10 +44,8 @@ export class DataComponent implements OnInit {
         this.selected = datum;
         if (this.onRowClick) {
             let testPrediction = this.testPredictions[index];
-            if (!testPrediction.wasPredicted) {
-                testPrediction.wasCorrect = this.onRowClick(datum)[0] === datum[this.data.targetProperty];
-                testPrediction.wasPredicted = true;
-            }
+            testPrediction.wasCorrect = this.onRowClick(datum)[0] === datum[this.data.targetProperty];
+            testPrediction.wasPredicted = true;
         }
     }
 }

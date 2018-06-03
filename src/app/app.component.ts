@@ -17,12 +17,4 @@ export class AppComponent {
         this.selectedDataset = this.datasets[0];
         this.selectedAlgorithmName = 'ID3';
     }
-
-    selectDataset = (dataset: Data) => {
-        this.selectedDataset = dataset;
-    }
-
-    selectAlgorithm = (algorithmName: string) => {
-        this.selectedAlgorithmName = algorithmName;
-    }
 }

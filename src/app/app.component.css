@@ -56,16 +56,7 @@ h2 {
     right: 0;
 }
 
-.dataset {
+.head-select {
+    margin: 8px;
     float:left;
-    cursor: pointer;
-    padding: 0 5px
-}
-
-.dataset.selected {
-    background-color: cadetblue;
-}
-
-.dataset.selected h2 {
-    font-weight: bold;
 }
